@@ -162,14 +162,12 @@ export const ProjectDetail = () => {
 
     // Fetch Assets
     useEffect(() => {
-        // Use static JSON for GitHub Pages (generated at build time)
-        fetch('/artwork/assets.json')
+        // Use static JSON (root path for Vercel)
+        fetch('/assets.json')
             .then(res => res.json())
             .then(data => setAssets(data))
             .catch(err => {
                 console.error("Failed to load assets", err)
-                // Fallback for dev if basePath isn't active or path differs? 
-                // Actually if basePath is set in config, it should be respected.
             })
     }, [])
 
@@ -190,8 +188,8 @@ export const ProjectDetail = () => {
     })
 
     const items = useMemo(() => {
-        // Prepend basePath '/artwork' for GitHub Pages
-        const bp = '/artwork'
+        // No base path needed for Vercel (root)
+        const bp = ''
         if (projectFocus === 'image') return assets.images.map(f => `${bp}/assets/works/${f}`)
         if (projectFocus === 'video') return assets.videos.map(f => `${bp}/assets/works/${f}`)
         if (projectFocus === 'artwork') return assets.artworks.map(f => `${bp}/assets/artwork/${f}`)

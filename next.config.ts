@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/artwork',
+  // basePath removed for Vercel
   images: {
     unoptimized: true,
   },
